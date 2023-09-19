@@ -12,6 +12,11 @@ typedef struct endereco{
     char cidade[50];
 }Endereco;
 
+typedef struct celular{
+    char ddd[2];
+    char numero[9]
+}Celular;
+
 typedef struct telefone{
     char ddd[2];
     char numero[9];
@@ -21,7 +26,9 @@ typedef struct contato{
     char nome[50];
     char email[30];
     Endereco endereco;
+    celular Celular[2];
     Telefone telefone[2];
+    struct contato *proximo;
 }Contato;
 
 int main(){
