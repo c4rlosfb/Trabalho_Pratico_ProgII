@@ -4,15 +4,11 @@
 #define LIMIT_RUA 50
 #define LIMIT_BAIRRO 50
 #define LIMIT_CIDADE 50
-#define LIMIT_DDD 2
+#define LIMIT_DDD 3
 #define LIMIT_NUMERO 9
 #define LIMIT_NOME 50
 #define LIMIT_EMAIL 30
 
-typedef struct{
-    int tamanho;
-    Contato *inicio;
-}Inicio;
 
 typedef struct endereco{
     char rua[LIMIT_RUA];
@@ -37,7 +33,13 @@ typedef struct contato{
     Endereco endereco;
     Celular celular[2];
     Telefone telefone[2];
-    struct contato *proximo;
+    struct contato * proximo;
 }Contato;
+
+
+typedef struct inicio{
+    int tamanho;
+    Contato * inicio;
+}Inicio;
 
 #endif
