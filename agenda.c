@@ -31,9 +31,9 @@ copiar um valor para os respectivos campos de um contato sem precisar utilizar a
 
 int main(){
 
-    Inicio * agenda = (Inicio *) calloc(1, sizeof(Inicio));
-    agenda->inicio = NULL;
-    agenda->tamanho = 0;
+    Inicio agenda;
+    agenda.inicio = NULL;
+    agenda.tamanho = 0;
 
     int opcao = 0;
 
@@ -53,31 +53,33 @@ int main(){
 
         switch (opcao){
             case 1:
-                adicionarPrimeiro (agenda);
-                adicionarUltimo (agenda);
+                adicionarPrimeiro(&agenda, criador());
                 break;
             case 2:
-                adicionarQualquer (agenda);
+                adicionarUltimo(&agenda, criador());
                 break;
             case 3:
-                removerPrimeiro (agenda);
-                removerUltimo (agenda);
+                adicionarQualquer(&agenda, criador());
                 break;
-            case 4:
-                removerQualquer (agenda);
-                break;
-            case 5:
-                editarContato (agenda);
-                break;
-            case 6:
-                listarContatos (agenda);
-                break;
-            case 7:
-                buscarContato (agenda);
-                break;
-            case 8:
-                aumentarDiminuir (agenda);
-                break;
+            // case 3:
+            //     removerPrimeiro (&agenda);
+            //     removerUltimo (&agenda);
+            //     break;
+            // case 4:
+            //     removerQualquer (&agenda);
+            //     break;
+            // case 5:
+            //     editarContato (&agenda);
+            //     break;
+            // case 6:
+            //     listarContatos (&agenda);
+            //     break;
+            // case 7:
+            //     buscarContato (&agenda);
+            //     break;
+            // case 8:
+            //     aumentarDiminuir (&agenda);
+            //     break;
             case 9:
                 printf("Saindo...\n");
                 break;
