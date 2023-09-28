@@ -4,13 +4,17 @@
 
 Contato * criador();
 
+Contato * preencherContato();
+
+void imprimirContatos(Inicio * inicio);
+
 void adicionarPrimeiro(Inicio * agenda, Contato * contato);
 
 void adicionarUltimo(Inicio * agenda, Contato * contato);
 
 void adicionarQualquer(Inicio * agenda, Contato * contato);
 
-// void removerPrimeiro(Inicio * agenda);
+void removerPrimeiro(Inicio * agenda);
 
 // void removerUltimo(Inicio * agenda);
 

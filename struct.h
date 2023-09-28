@@ -17,11 +17,6 @@ typedef struct endereco{
     char cidade[LIMIT_CIDADE];
 }Endereco;
 
-typedef struct celular{
-    char ddd[LIMIT_DDD];
-    char numero[LIMIT_NUMERO];
-}Celular;
-
 typedef struct telefone{
     char ddd[LIMIT_DDD];
     char numero[LIMIT_NUMERO];
@@ -31,7 +26,6 @@ typedef struct contato{
     char nome[LIMIT_NOME];
     char email[LIMIT_EMAIL];
     Endereco endereco;
-    Celular celular[2];
     Telefone telefone[2];
     struct contato * proximo;
 }Contato;
