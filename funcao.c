@@ -4,6 +4,59 @@
 #include "funcao.h"
 #include "struct.h"
 
+void imprimirContatos(Inicio * inicio) {
+    if(inicio->inicio == NULL) {
+        printf("Agenda vazia!\n");
+        return;
+    } 
+    else {
+        Contato * aux = inicio->inicio;
+
+        do
+        {
+            printf("Nome: %s\n", aux->nome);
+            printf("Email: %s\n", aux->email);
+            printf("Rua: %s\n", aux->endereco.rua);
+            printf("Numero: %d\n", aux->endereco.numero);
+            printf("Bairro: %s\n", aux->endereco.bairro);
+            printf("Cidade: %s\n", aux->endereco.cidade);
+            printf("DDD do celular: %s\n", aux->telefone[0].ddd);
+            printf("Numero do celular: %s\n", aux->telefone[0].numero);
+            printf("DDD do telefone: %s\n", aux->telefone[1].ddd);
+            printf("Numero do telefone: %s\n", aux->telefone[1].numero);
+            printf("\n");
+
+            aux = aux->proximo;
+        } while (aux != NULL);
+    }
+}
+
+Contato * preencherContato(){
+
+    Contato * novoContato = (Contato *) malloc(sizeof(Contato));
+
+    printf("Digite o nome: ");
+    scanf("%s", novoContato->nome);
+    printf("Digite o email: ");
+    scanf("%s", novoContato->email);
+    printf("Digite o nome da sua rua: ");
+    scanf("%s", novoContato->endereco.rua);
+    printf("Digite o numero da sua casa: ");
+    scanf("%d", &novoContato->endereco.numero);
+    printf("Digite o seu bairro: ");
+    scanf("%s", novoContato->endereco.bairro);
+    printf("Digite a sua cidade: ");
+    scanf("%s", novoContato->endereco.cidade);
+    printf("Digite o seu celular (<ddd> <celular>): ");
+    scanf("%s %s", novoContato->telefone[0].ddd, novoContato->telefone[0].numero);
+    printf("Digite o seu telefone (<ddd> <telefone>): ");
+    scanf("%s %s", novoContato->telefone[0].ddd, novoContato->telefone[0].numero);
+
+    novoContato->proximo = NULL;
+
+    return novoContato;
+}
+
 Contato * criador(){
 
     Contato * novoContato = (Contato *) calloc(1, sizeof(Contato));
@@ -15,9 +68,8 @@ Contato * criador(){
     novoContato->endereco.numero = 455;
     strcmpi(novoContato->endereco.bairro, "Jardim Paraiso");
     strcmpi(novoContato->endereco.cidade, "Pocos de Caldas");
-    novoContato->endereco.numero = 124;
-    strcmpi(novoContato->celular[0].ddd, "35");
-    strcmpi(novoContato->celular[0].numero, "991186430");
+    strcmpi(novoContato->telefone[0].ddd, "35");
+    strcmpi(novoContato->telefone[0].numero, "991186430");
     strcmpi(novoContato->telefone[1].ddd, "35");
     strcmpi(novoContato->telefone[1].numero, "937225238");
     novoContato->proximo = NULL;
@@ -95,19 +147,19 @@ void adicionarQualquer(Inicio * agenda, Contato * contato){
     }
 }
 
-// void removerPrimeiro(Inicio * agenda){
+//void removerPrimeiro(Inicio * agenda){
 
-//     if(agenda->inicio == NULL){
-//         printf("Agenda vazia!\n");
-//     }else{
-//         Contato * aux = agenda->inicio;
-//         agenda->inicio = aux->proximo;
-//         free(aux);
-//     }
+//    if(agenda->inicio == NULL){
+//        printf("Agenda vazia!\n");
+//   }else{
+//        Contato * aux = agenda->inicio;
+//        agenda->inicio = aux->proximo;
+//        free(aux);
+//    }
 
-//     agenda->tamanho--;
+//    agenda->tamanho--;
 
-// }
+//}
 
 // void removerUltimo(Inicio * agenda){
 
