@@ -50,7 +50,7 @@ Contato * preencherContato(){
     printf("Digite o seu celular (<ddd> <celular>): ");
     scanf("%s %s", novoContato->telefone[0].ddd, novoContato->telefone[0].numero);
     printf("Digite o seu telefone (<ddd> <telefone>): ");
-    scanf("%s %s", novoContato->telefone[0].ddd, novoContato->telefone[0].numero);
+    scanf("%s %s", novoContato->telefone[1].ddd, novoContato->telefone[1].numero);
 
     novoContato->proximo = NULL;
 

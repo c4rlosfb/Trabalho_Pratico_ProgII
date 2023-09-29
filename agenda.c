@@ -23,6 +23,7 @@ tamanho da agenda.
 Observação: Apenas para facilitar as correções pelo professor, armazene na memória da agenda os dados
 de 5 contatos xos, faça uso das funções strcpy() ou do strncpy(), essas duas funções possibilitam armazenar
 copiar um valor para os respectivos campos de um contato sem precisar utilizar a função scanf() para isso.*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -43,7 +44,7 @@ int main(){
                 "   3 - Adicionar um contato a qualuqer posicao:\n"
                 "   4 - Imprimir lista\n"
                 
-                "   9 - Sair.\n"
+                "   9 - Sair.\n\n"
                 "   Escolha uma opcao: ");
         scanf("%d", &opcao);
 
