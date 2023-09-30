@@ -90,6 +90,24 @@ void adicionarPrimeiro(Inicio * agenda, Contato * contato){
     agenda->tamanho++;
 }
 
+void adicionarUltimo(Inicio * agenda, Contato * contato){
+
+    Contato * novoContato = contato;
+
+    if(agenda->inicio == NULL){
+        agenda->inicio = novoContato;
+    }else{
+        Contato * aux = agenda->inicio;
+        while(aux->proximo != NULL){
+            aux = aux->proximo;
+        }
+        aux->proximo = novoContato;
+    }
+
+    agenda->tamanho++;
+}
+
+/* função com erro
 void adicionarUltimo(Inicio * agenda, Contato * contato) {
 
     Contato * novoContato = agenda->inicio;
@@ -104,7 +122,7 @@ void adicionarUltimo(Inicio * agenda, Contato * contato) {
     }
 
     agenda->tamanho++;
-}
+}*/
 
 void adicionarQualquer(Inicio * agenda, Contato * contato){
 

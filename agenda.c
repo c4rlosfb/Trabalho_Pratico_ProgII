@@ -41,7 +41,7 @@ int main(){
     do{
         printf( "\n   1 - Adicionar um contato na primeira posicao\n"
                 "   2 - Adicionar um contato na ultima posicao\n"
-                "   3 - Adicionar um contato a qualuqer posicao:\n"
+                "   3 - Adicionar um contato a qualquer posicao:\n"
                 "   4 - Imprimir lista\n"
                 
                 "   9 - Sair.\n\n"
