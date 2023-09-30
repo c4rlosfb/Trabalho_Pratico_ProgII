@@ -14,7 +14,7 @@ void adicionarUltimo(Inicio * agenda, Contato * contato);
 
 void adicionarQualquer(Inicio * agenda, Contato * contato);
 
-void removerPrimeiro(Inicio * agenda);
+//void removerPrimeiro(Inicio * agenda);
 
 // void removerUltimo(Inicio * agenda);
 

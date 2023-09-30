@@ -14,12 +14,10 @@ void imprimirContatos(Inicio * inicio) {
 
         do
         {
+            printf("---------Agenda----------\n");
             printf("Nome: %s\n", aux->nome);
             printf("Email: %s\n", aux->email);
-            printf("Rua: %s\n", aux->endereco.rua);
-            printf("Numero: %d\n", aux->endereco.numero);
-            printf("Bairro: %s\n", aux->endereco.bairro);
-            printf("Cidade: %s\n", aux->endereco.cidade);
+            printf("Endereco: %s, %s - %d, %s\n", aux->endereco.bairro, aux->endereco.rua, aux->endereco.numero, aux->endereco.cidade);
             printf("DDD do celular: %s\n", aux->telefone[0].ddd);
             printf("Numero do celular: %s\n", aux->telefone[0].numero);
             printf("DDD do telefone: %s\n", aux->telefone[1].ddd);
@@ -39,12 +37,12 @@ Contato * preencherContato(){
     scanf("%s", novoContato->nome);
     printf("Digite o email: ");
     scanf("%s", novoContato->email);
+    printf("Digite o seu bairro: ");
+    scanf("%s", novoContato->endereco.bairro);
     printf("Digite o nome da sua rua: ");
     scanf("%s", novoContato->endereco.rua);
     printf("Digite o numero da sua casa: ");
     scanf("%d", &novoContato->endereco.numero);
-    printf("Digite o seu bairro: ");
-    scanf("%s", novoContato->endereco.bairro);
     printf("Digite a sua cidade: ");
     scanf("%s", novoContato->endereco.cidade);
     printf("Digite o seu celular (<ddd> <celular>): ");
@@ -107,7 +105,7 @@ void adicionarUltimo(Inicio * agenda, Contato * contato){
     agenda->tamanho++;
 }
 
-/* função com erro
+/* função errada adicionarUltimo
 void adicionarUltimo(Inicio * agenda, Contato * contato) {
 
     Contato * novoContato = agenda->inicio;
@@ -126,15 +124,61 @@ void adicionarUltimo(Inicio * agenda, Contato * contato) {
 
 void adicionarQualquer(Inicio * agenda, Contato * contato){
 
+    Contato * novoContato = contato;
+
     Contato * atual = agenda->inicio;
     Contato * proximo = atual;
 
     int posicao = 0;
     int contador = 0;
+
     printf("Digite a posicao que deseja inserir o contato: ");
     scanf("%d", &posicao);
 
-    if(posicao > 1) {
+    if(posicao < 1) {
+        printf("Impossivel inserir elementos em posicoes negativas ou nulas!\n");
+        return;
+    }
+
+    if(posicao == 1) {
+        atual->proximo = agenda->inicio;
+        agenda->inicio = atual;
+        agenda->tamanho++;
+        return;
+    }
+
+    if(posicao > agenda->tamanho) {
+        printf("Posicao inexistente!\n");
+        return;
+    } 
+
+    while(atual->proximo != NULL) {
+
+        if(contador == posicao){
+            atual->proximo = novoContato;
+            novoContato->proximo = proximo;
+            agenda->tamanho++;
+            return;
+        }
+        atual = proximo;
+        proximo = proximo->proximo;
+        contador++;
+    }
+}
+
+
+/*void adicionarQualquer(Inicio * agenda, Contato * contato){
+
+    Contato * atual = agenda->inicio;
+    Contato * proximo = atual;
+
+    int posicao = 0;
+    int contador = 0;
+    
+    printf("Digite a posicao que deseja inserir o contato: ");
+    scanf("%d", &posicao);
+
+    if(posicao < 1) {
         printf("Impossivel inserir elementos em posicoes negativas ou nulas!\n");
         return;
     }
@@ -163,7 +207,7 @@ void adicionarQualquer(Inicio * agenda, Contato * contato){
         proximo = proximo->proximo;
         contador++;
     }
-}
+}*/
 
 //void removerPrimeiro(Inicio * agenda){
 

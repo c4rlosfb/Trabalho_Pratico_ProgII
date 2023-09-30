@@ -39,7 +39,8 @@ int main(){
     int opcao = 0;
 
     do{
-        printf( "\n   1 - Adicionar um contato na primeira posicao\n"
+        printf( "\n------------------Opcoes------------------\n"
+                "\n   1 - Adicionar um contato na primeira posicao\n"
                 "   2 - Adicionar um contato na ultima posicao\n"
                 "   3 - Adicionar um contato a qualquer posicao:\n"
                 "   4 - Imprimir lista\n"
