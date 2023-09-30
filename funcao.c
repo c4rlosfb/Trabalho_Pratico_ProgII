@@ -12,20 +12,17 @@ void imprimirContatos(Inicio * inicio) {
     else {
         Contato * aux = inicio->inicio;
 
-        do
-        {
+        do{        
             printf("---------Agenda----------\n");
             printf("Nome: %s\n", aux->nome);
             printf("Email: %s\n", aux->email);
-            printf("Endereco: %s, %s - %d, %s\n", aux->endereco.bairro, aux->endereco.rua, aux->endereco.numero, aux->endereco.cidade);
-            printf("DDD do celular: %s\n", aux->telefone[0].ddd);
-            printf("Numero do celular: %s\n", aux->telefone[0].numero);
-            printf("DDD do telefone: %s\n", aux->telefone[1].ddd);
-            printf("Numero do telefone: %s\n", aux->telefone[1].numero);
+            printf("Endereco: %s, %s - n: %d, %s\n", aux->endereco.bairro, aux->endereco.rua, aux->endereco.numero, aux->endereco.cidade);
+            printf("Celular: (%s) %s\n", aux->telefone[0].ddd, aux->telefone[0].numero);
+            printf("Telefone: (%s) %s\n", aux->telefone[1].ddd, aux->telefone[1].numero);
             printf("\n");
 
             aux = aux->proximo;
-        } while (aux != NULL);
+        }while(aux != NULL);
     }
 }
 
@@ -34,21 +31,22 @@ Contato * preencherContato(){
     Contato * novoContato = (Contato *) malloc(sizeof(Contato));
 
     printf("Digite o nome: ");
-    scanf("%s", novoContato->nome);
+    scanf(" %50[^\n]s", novoContato->nome);
     printf("Digite o email: ");
-    scanf("%s", novoContato->email);
+    scanf(" %30[^\n]s", novoContato->email);
     printf("Digite o seu bairro: ");
-    scanf("%s", novoContato->endereco.bairro);
+    scanf(" %50[^\n]s", novoContato->endereco.bairro);
     printf("Digite o nome da sua rua: ");
-    scanf("%s", novoContato->endereco.rua);
+    scanf(" %50[^\n]s", novoContato->endereco.rua);
     printf("Digite o numero da sua casa: ");
     scanf("%d", &novoContato->endereco.numero);
     printf("Digite a sua cidade: ");
-    scanf("%s", novoContato->endereco.cidade);
-    printf("Digite o seu celular (<ddd> <celular>): ");
-    scanf("%s %s", novoContato->telefone[0].ddd, novoContato->telefone[0].numero);
-    printf("Digite o seu telefone (<ddd> <telefone>): ");
-    scanf("%s %s", novoContato->telefone[1].ddd, novoContato->telefone[1].numero);
+    scanf(" %50[^\n]s", novoContato->endereco.cidade);
+    printf("Digite o seu celular (<xx> <xxxxxxxxx>): ");
+    scanf("%2s %9s", novoContato->telefone[0].ddd, novoContato->telefone[0].numero);
+    printf("Digite o seu telefone (<xx> <xxxxxxxxx>): ");
+    scanf("%2s %9s", novoContato->telefone[1].ddd, novoContato->telefone[1].numero);
+
 
     novoContato->proximo = NULL;
 
@@ -105,24 +103,7 @@ void adicionarUltimo(Inicio * agenda, Contato * contato){
     agenda->tamanho++;
 }
 
-/* função errada adicionarUltimo
-void adicionarUltimo(Inicio * agenda, Contato * contato) {
-
-    Contato * novoContato = agenda->inicio;
-
-    if(agenda->inicio == NULL){
-        agenda->inicio = novoContato;
-    }else{
-        while(novoContato->proximo != NULL){
-            novoContato = novoContato->proximo;
-        }
-        novoContato->proximo = novoContato;
-    }
-
-    agenda->tamanho++;
-}*/
-
-void adicionarQualquer(Inicio * agenda, Contato * contato){
+/*void adicionarQualquer(Inicio * agenda, Contato * contato){
 
     Contato * novoContato = contato;
 
@@ -165,9 +146,9 @@ void adicionarQualquer(Inicio * agenda, Contato * contato){
         contador++;
     }
 }
+*/
 
-
-/*void adicionarQualquer(Inicio * agenda, Contato * contato){
+void adicionarQualquer(Inicio * agenda, Contato * contato){
 
     Contato * atual = agenda->inicio;
     Contato * proximo = atual;
@@ -207,7 +188,7 @@ void adicionarQualquer(Inicio * agenda, Contato * contato){
         proximo = proximo->proximo;
         contador++;
     }
-}*/
+}
 
 //void removerPrimeiro(Inicio * agenda){
 
