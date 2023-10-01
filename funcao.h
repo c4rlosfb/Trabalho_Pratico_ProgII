@@ -24,6 +24,6 @@ void editarContato(Inicio * agenda);
 
 void buscarContato(Inicio * agenda);
 
-void ContatosEstaticos(Inicio * agenda, Contato * contato1, Contato * contato2, Contato * contato3, Contato * contato4, Contato * contato5); //complicado porém certo
+void ContatosEstaticos(Inicio * agenda, Contato * contato1, Contato * contato2, Contato * contato3, Contato * contato4, Contato * contato5);
 
 #endif
