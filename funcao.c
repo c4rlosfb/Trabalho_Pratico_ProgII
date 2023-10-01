@@ -4,6 +4,7 @@
 #include "funcao.h"
 #include "struct.h"
 
+
 void imprimirContatos(Inicio * inicio) {
     if(inicio->inicio == NULL) {
         printf("Agenda vazia!\n");
@@ -12,8 +13,14 @@ void imprimirContatos(Inicio * inicio) {
     else {
         Contato * aux = inicio->inicio;
 
+        if (aux == NULL)
+        {
+            printf("Nao foi possivel alocar contato\n");
+            exit(1);
+        }
+        
         do{        
-            printf("---------Agenda----------\n");
+            printf("---------Contato----------\n");
             printf("Nome: %s\n", aux->nome);
             printf("Email: %s\n", aux->email);
             printf("Endereco: %s, %s - n: %d, %s\n", aux->endereco.bairro, aux->endereco.rua, aux->endereco.numero, aux->endereco.cidade);
@@ -26,7 +33,52 @@ void imprimirContatos(Inicio * inicio) {
     }
 }
 
-Contato * preencherContato(){
+void ContatosEstaticos(Inicio * agenda, Contato * contato1, Contato * contato2, Contato * contato3, Contato * contato4, Contato * contato5 ){
+    
+    contato1 = criador(contato1, "Joao", "gmail.com", "Rua A", 1, "Bairro A", "Cidade A", "11", "111111111", "11", "111111111 ");
+    contato2 = criador(contato2, "Maria", "gmail.com", "Rua B", 2, "Bairro B", "Cidade B", "22", "222222222", "22", "222222222 ");
+    contato3 = criador(contato3, "Jose", "gmail.com", "Rua C", 3, "Bairro C", "Cidade C", "33", "333333333", "33", "333333333 ");
+    contato4 = criador(contato4, "Ana", "gmail.com", "Rua D", 4, "Bairro D", "Cidade D", "44", "444444444", "44", "444444444 ");
+    contato5 = criador(contato5, "Pedro", "gmail.com", "Rua E", 5, "Bairro E", "Cidade E", "55", "555555555", "55", "555555555 ");
+
+    adicionarPrimeiro(agenda, contato1);
+    adicionarUltimo(agenda, contato2);
+    adicionarUltimo(agenda, contato3);
+    adicionarUltimo(agenda, contato4);
+    adicionarUltimo(agenda, contato5);
+
+
+}
+
+Contato * criador( Contato * contato, char nome[], char email[], char rua[], int numero, char bairro[], char cidade[], char ddd1[], char numero1[], char ddd2[], char numero2[]){
+
+     contato = (Contato *) malloc(sizeof(Contato));
+
+    if (contato == NULL)
+    {
+        printf("Nao foi possivel alocar contato\n");
+        exit(1);
+    }
+
+    strcpy(contato->nome, nome);
+    strcpy(contato->email, email);
+    strcpy(contato->endereco.rua, rua);
+    contato->endereco.numero = numero;
+    strcpy(contato->endereco.bairro, bairro);
+    strcpy(contato->endereco.cidade, cidade);
+    strcpy(contato->telefone[0].ddd, ddd1);
+    strcpy(contato->telefone[0].numero, numero1);
+    strcpy(contato->telefone[1].ddd, ddd2);
+    strcpy(contato->telefone[1].numero, numero2);
+
+    contato->proximo = NULL;
+
+    return contato;
+
+}
+
+Contato *preencherContato()
+{
 
     Contato * novoContato = (Contato *) malloc(sizeof(Contato));
 
@@ -47,31 +99,11 @@ Contato * preencherContato(){
     printf("Digite o seu telefone (<xx> <xxxxxxxxx>): ");
     scanf("%2s %9s", novoContato->telefone[1].ddd, novoContato->telefone[1].numero);
 
-
     novoContato->proximo = NULL;
 
     return novoContato;
 }
 
-Contato * criador(){
-
-    Contato * novoContato = (Contato *) calloc(1, sizeof(Contato));
-    novoContato->proximo = NULL;
-
-    strcmpi(novoContato->nome, "Celso Augusto de Oliveira Junior");
-    strcmpi(novoContato->email, "celso.oliveira@alunos.ifsuldeminas.edu.br");
-    strcmpi(novoContato->endereco.rua, "Jose Dias Campos");
-    novoContato->endereco.numero = 455;
-    strcmpi(novoContato->endereco.bairro, "Jardim Paraiso");
-    strcmpi(novoContato->endereco.cidade, "Pocos de Caldas");
-    strcmpi(novoContato->telefone[0].ddd, "35");
-    strcmpi(novoContato->telefone[0].numero, "991186430");
-    strcmpi(novoContato->telefone[1].ddd, "35");
-    strcmpi(novoContato->telefone[1].numero, "937225238");
-    novoContato->proximo = NULL;
-
-    return novoContato;
-}
 
 void adicionarPrimeiro(Inicio * agenda, Contato * contato){
 
@@ -103,71 +135,31 @@ void adicionarUltimo(Inicio * agenda, Contato * contato){
     agenda->tamanho++;
 }
 
-/*void adicionarQualquer(Inicio * agenda, Contato * contato){
+void adicionarQualquer(Inicio * agenda, Contato * contato, int posicao){
 
-    Contato * novoContato = contato;
 
-    Contato * atual = agenda->inicio;
-    Contato * proximo = atual;
-
-    int posicao = 0;
-    int contador = 0;
-
-    printf("Digite a posicao que deseja inserir o contato: ");
-    scanf("%d", &posicao);
-
-    if(posicao < 1) {
+    if(posicao < 1) 
+    {
         printf("Impossivel inserir elementos em posicoes negativas ou nulas!\n");
         return;
     }
 
-    if(posicao == 1) {
-        atual->proximo = agenda->inicio;
-        agenda->inicio = atual;
-        agenda->tamanho++;
-        return;
-    }
-
-    if(posicao > agenda->tamanho) {
-        printf("Posicao inexistente!\n");
-        return;
-    } 
-
-    while(atual->proximo != NULL) {
-
-        if(contador == posicao){
-            atual->proximo = novoContato;
-            novoContato->proximo = proximo;
-            agenda->tamanho++;
-            return;
-        }
-        atual = proximo;
-        proximo = proximo->proximo;
-        contador++;
-    }
-}
-*/
-
-void adicionarQualquer(Inicio * agenda, Contato * contato){
-
     Contato * atual = agenda->inicio;
     Contato * proximo = atual;
-
-    int posicao = 0;
-    int contador = 0;
     
-    printf("Digite a posicao que deseja inserir o contato: ");
-    scanf("%d", &posicao);
-
-    if(posicao < 1) {
-        printf("Impossivel inserir elementos em posicoes negativas ou nulas!\n");
-        return;
-    }
-
-    if(posicao == 1) {
-        atual->proximo = agenda->inicio;
-        agenda->inicio = atual;
+    if(posicao == 1) 
+    {
+        if(agenda->inicio == NULL)
+        {
+        agenda->inicio = contato;
+        }
+        else
+        {
+        contato->proximo = agenda->inicio;
+        agenda->inicio = contato;
+        }
         agenda->tamanho++;
+
         return;
     }
 
@@ -175,7 +167,9 @@ void adicionarQualquer(Inicio * agenda, Contato * contato){
         printf("Posicao inexistente!\n");
         return;
     } 
-
+    
+    int contador = 1;
+    
     while(atual->proximo != NULL) {
 
         if(contador == posicao){
@@ -190,212 +184,132 @@ void adicionarQualquer(Inicio * agenda, Contato * contato){
     }
 }
 
-//void removerPrimeiro(Inicio * agenda){
+void removerPrimeiro(Inicio * agenda){
 
-//    if(agenda->inicio == NULL){
-//        printf("Agenda vazia!\n");
-//   }else{
-//        Contato * aux = agenda->inicio;
-//        agenda->inicio = aux->proximo;
-//        free(aux);
-//    }
+   if(agenda->inicio == NULL){
+       printf("Agenda vazia!\n");
+  }else{
+       Contato * aux = agenda->inicio;
+       agenda->inicio = aux->proximo;
+       free(aux);
+   }
 
-//    agenda->tamanho--;
+   agenda->tamanho--;
 
-//}
+}
 
-// void removerUltimo(Inicio * agenda){
 
-//     if(agenda->inicio == NULL){
-//         printf("Agenda vazia!\n");
-//     }else{
-//         Contato * aux = agenda->inicio;
-//         while(aux->proximo->proximo != NULL){
-//             aux = aux->proximo;
-//         }
-//         free(aux->proximo);
-//         aux->proximo = NULL;
-//     }
+void removerUltimo(Inicio * agenda){
 
-//     agenda->tamanho--;
+    if(agenda->inicio == NULL){
+        printf("Agenda vazia!\n");
+    }else{
+        Contato * aux = agenda->inicio;
+        while(aux->proximo->proximo != NULL){
+            aux = aux->proximo;
+        }
+        free(aux->proximo);
+        aux->proximo = NULL;
+    }
 
-// }
+    agenda->tamanho--;
 
-// void removerQualquer(Inicio * agenda){
+}
 
-//     if(agenda->inicio == NULL){
-//         printf("Agenda vazia!\n");
-//     }else{
-//         int posicao = 0;
-//         printf("Digite a posicao que deseja remover o contato: ");
-//         scanf("%d", &posicao);
-//         getchar();
+void removerQualquer(Inicio * agenda){
 
-//         if(posicao == 0){
-//             Contato * aux = agenda->inicio;
-//             agenda->inicio = aux->proximo;
-//             free(aux);
-//         }else if(posicao == agenda->tamanho - 1){
-//             Contato * aux = agenda->inicio;
-//             while(aux->proximo->proximo != NULL){
-//                 aux = aux->proximo;
-//             }
-//             free(aux->proximo);
-//             aux->proximo = NULL;
-//         }else{
-//             Contato * aux = agenda->inicio;
-//             for(int i = 0; i < posicao - 1; i++){
-//                 aux = aux->proximo;
-//             }
-//             Contato * aux2 = aux->proximo;
-//             aux->proximo = aux2->proximo;
-//             free(aux2);
-//         }
-//     }
+    if(agenda->inicio == NULL){
+        printf("Agenda vazia!\n");
+    }else{
+        int posicao = 0;
+        printf("Digite a posicao que deseja remover o contato: ");
+        scanf("%d", &posicao);
 
-//     agenda->tamanho--;
+        Contato * aux = agenda->inicio;
+        Contato * aux2 = aux->proximo;
+        for(int i = 0; i < posicao - 1; i++){
+            aux = aux->proximo;
+            aux2 = aux2->proximo;
+        }
+        aux->proximo = aux2->proximo;
+        free(aux2);
+    }
 
-// }
+    agenda->tamanho--;
 
-// void editarContato(Inicio * agenda){
+}
 
-//     if(agenda->inicio == NULL){
-//         printf("Agenda vazia!\n");
-//     }else{
-//         int posicao = 0;
-//         printf("Digite a posicao que deseja editar o contato: ");
-//         scanf("%d", &posicao);
-//         getchar();
+//corrigir essa função
+void editarContato(Inicio *agenda){
 
-//         Contato * aux = agenda->inicio;
-//         for(int i = 0; i < posicao; i++){
-//             aux = aux->proximo;
-//         }
+    if(agenda->inicio == NULL){
+        printf("Agenda vazia!\n");
+    }else{
+        char nome[LIMIT_NOME];
+        printf("Digite o nome que deseja editar: ");
+        scanf(" %50[^\n]s", nome);
 
-//         printf("Digite o nome: ");
-//         gets(aux->nome);
-//         printf("Digite o email: ");
-//         gets(aux->email);
-//         printf("Digite a rua: ");
-//         gets(aux->endereco.rua);
-//         printf("Digite o numero: ");
-//         gets(aux->endereco.numero);
-//         printf("Digite o bairro: ");
-//         gets(aux->endereco.bairro);
-//         printf("Digite a cidade: ");
-//         gets(aux->endereco.cidade);
-//         printf("Digite o DDD do celular: ");
-//         gets(aux->celular[0].ddd);
-//         printf("Digite o numero do celular: ");
-//         gets(aux->celular[0].numero);
-//         printf("Digite o DDD do telefone: ");
-//         gets(aux->telefone[0].ddd);
-//         printf("Digite o numero do telefone: ");
-//         gets(aux->telefone[0].numero);
+        Contato * aux = agenda->inicio;
+        while(aux != NULL){
+            if(strcmpi(aux->nome, nome) == 0){
+                printf("Digite o novo nome: ");
+                scanf(" %50[^\n]s", aux->nome);
+                printf("Digite o novo email: ");
+                scanf(" %30[^\n]s", aux->email);
+                printf("Digite o novo bairro: ");
+                scanf(" %50[^\n]s", aux->endereco.bairro);
+                printf("Digite o novo nome da rua: ");
+                scanf(" %50[^\n]s", aux->endereco.rua);
+                printf("Digite o novo numero da casa: ");
+                scanf("%d", &aux->endereco.numero);
+                printf("Digite a nova cidade: ");
+                scanf(" %50[^\n]s", aux->endereco.cidade);
+                printf("Digite o novo celular (<xx> <xxxxxxxxx>): ");
+                scanf("%2s %9s", aux->telefone[0].ddd, aux->telefone[0].numero);
+                printf("Digite o novo telefone (<xx> <xxxxxxxxx>): ");
+                scanf("%2s %9s", aux->telefone[1].ddd, aux->telefone[1].numero);
+                break;
+            }
+            aux = aux->proximo;
+        }
+    }
 
-//     }
+}
 
-// }
+void buscarContato(Inicio * agenda){
 
-// void listarContatos(Inicio * agenda){
+    if(agenda->inicio == NULL){
+        printf("Agenda vazia!\n");
+    }else{
+        char nome[LIMIT_NOME];
+        printf("Digite o nome que deseja buscar: ");
+        scanf(" %50[^\n]s", nome);
 
-//     if(agenda->inicio == NULL){
-//         printf("Agenda vazia!\n");
-//     }else{
-//         Contato * aux = agenda->inicio;
-//         while(aux != NULL){
-//             printf("Nome: %s\n", aux->nome);
-//             printf("Email: %s\n", aux->email);
-//             printf("Rua: %s\n", aux->endereco.rua);
-//             printf("Numero: %s\n", aux->endereco.numero);
-//             printf("Bairro: %s\n", aux->endereco.bairro);
-//             printf("Cidade: %s\n", aux->endereco.cidade);
-//             printf("DDD do celular: %s\n", aux->celular[0].ddd);
-//             printf("Numero do celular: %s\n", aux->celular[0].numero);
-//             printf("DDD do telefone: %s\n", aux->telefone[0].ddd);
-//             printf("Numero do telefone: %s\n", aux->telefone[0].numero);
-//             printf("\n");
-//             aux = aux->proximo;
-//         }
-//     }
+        Contato * aux = agenda->inicio;
 
-// }
+        if(strcmpi(aux->nome, nome) != 0){
+            printf("Contato nao encontrado!\n");
+        }else{
+            while(aux != NULL){
+                for(int i = 0; i <= agenda->tamanho; i++){
+                    if(strcmpi(aux->nome, nome) == 0){
+                        printf("Nome: %s\n", aux->nome);
+                        printf("Email: %s\n", aux->email);
+                        printf("Rua: %s\n", aux->endereco.rua);
+                        printf("Numero: %d\n", aux->endereco.numero);
+                        printf("Bairro: %s\n", aux->endereco.bairro);
+                        printf("Cidade: %s\n", aux->endereco.cidade);
+                        printf("DDD do celular: %s\n", aux->telefone[0].ddd);
+                        printf("Numero do celular: %s\n", aux->telefone[0].numero);
+                        printf("DDD do telefone: %s\n", aux->telefone[1].ddd);
+                        printf("Numero do telefone: %s\n", aux->telefone[1].numero);
+                        printf("\n");
+                    }
+                aux = aux->proximo;
+            }
+        }
+    }
+    }
+}
 
-// void buscarContato(Inicio * agenda){
-
-//     if(agenda->inicio == NULL){
-//         printf("Agenda vazia!\n");
-//     }else{
-//         char nome[LIMIT_NOME];
-//         printf("Digite o nome que deseja buscar: ");
-//         gets(nome);
-
-//         Contato * aux = agenda->inicio;
-//         while(aux != NULL){
-//             if(strcmpi(aux->nome, nome) == 0){
-//                 printf("Nome: %s\n", aux->nome);
-//                 printf("Email: %s\n", aux->email);
-//                 printf("Rua: %s\n", aux->endereco.rua);
-//                 printf("Numero: %s\n", aux->endereco.numero);
-//                 printf("Bairro: %s\n", aux->endereco.bairro);
-//                 printf("Cidade: %s\n", aux->endereco.cidade);
-//                 printf("DDD do celular: %s\n", aux->celular[0].ddd);
-//                 printf("Numero do celular: %s\n", aux->celular[0].numero);
-//                 printf("DDD do telefone: %s\n", aux->telefone[0].ddd);
-//                 printf("Numero do telefone: %s\n", aux->telefone[0].numero);
-//                 printf("\n");
-//                 break;
-//             }
-//             aux = aux->proximo;
-//         }
-//     }
-
-// }
-
-// void aumentarDiminuir(Inicio * agenda){
-
-//     int tamanho = 0;
-//     printf("Digite o tamanho que deseja aumentar ou diminuir: ");
-//     scanf("%d", &tamanho);
-//     getchar();
-
-//     if(tamanho > agenda->tamanho){
-//         for(int i = 0; i < tamanho - agenda->tamanho; i++){
-//             adicionarUltimo(agenda);
-//         }
-//     }else if(tamanho < agenda->tamanho){
-//         for(int i = 0; i < agenda->tamanho - tamanho; i++){
-//             removerUltimo(agenda);
-//         }
-//     }
-
-// }
-
-// void salvar(Inicio * agenda){
-
-//     FILE * arquivo = fopen("agenda.txt", "w");
-
-//     if(arquivo == NULL){
-//         printf("Erro ao abrir o arquivo!\n");
-//     }else{
-//         Contato * aux = agenda->inicio;
-//         while(aux != NULL){
-//             fprintf(arquivo, "%s\n", aux->nome);
-//             fprintf(arquivo, "%s\n", aux->email);
-//             fprintf(arquivo, "%s\n", aux->endereco.rua);
-//             fprintf(arquivo, "%s\n", aux->endereco.numero);
-//             fprintf(arquivo, "%s\n", aux->endereco.bairro);
-//             fprintf(arquivo, "%s\n", aux->endereco.cidade);
-//             fprintf(arquivo, "%s\n", aux->celular[0].ddd);
-//             fprintf(arquivo, "%s\n", aux->celular[0].numero);
-//             fprintf(arquivo, "%s\n", aux->telefone[0].ddd);
-//             fprintf(arquivo, "%s\n", aux->telefone[0].numero);
-//             fprintf(arquivo, "\n");
-//             aux = aux->proximo;
-//         }
-//     }
-
-//     fclose(arquivo);
-
-// }
 
