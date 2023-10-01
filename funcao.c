@@ -4,7 +4,7 @@
 #include "funcao.h"
 #include "struct.h"
 
-//certa, editar exibição para ser mais bonita
+//certa, editar exibição para ser mais bonita e organizada
 void imprimirContatos(Inicio * inicio) {
     if(inicio->inicio == NULL) {
         printf("Agenda vazia!\n");
