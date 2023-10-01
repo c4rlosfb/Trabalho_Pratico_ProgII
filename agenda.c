@@ -36,16 +36,29 @@ int main(){
     agenda.inicio = NULL;
     agenda.tamanho = 0;
 
+    Contato * contato1 = (Contato *) calloc(1, sizeof(Contato));
+    Contato * contato2 = (Contato *) calloc(1, sizeof(Contato));
+    Contato * contato3 = (Contato *) calloc(1, sizeof(Contato));
+    Contato * contato4 = (Contato *) calloc(1, sizeof(Contato));
+    Contato * contato5 = (Contato *) calloc(1, sizeof(Contato));
+
+    ContatosEstaticos(&agenda, contato1, contato2, contato3, contato4, contato5);
+
+    
     int opcao = 0;
 
     do{
-        printf( "\n------------------Opcoes------------------\n"
+        printf( "\n------------------MENU------------------\n"
                 "\n   1 - Adicionar um contato na primeira posicao\n"
                 "   2 - Adicionar um contato na ultima posicao\n"
                 "   3 - Adicionar um contato a qualquer posicao:\n"
                 "   4 - Imprimir lista\n"
-                
-                "   9 - Sair.\n\n"
+                "   5 - Remover o contato na primeira posicao\n"
+                "   6 - Remover o contato na ultima posicao\n"
+                "   7 - Remover o contato em qualquer posicao\n"
+                "   8 - Editar um contato qualquer\n"
+                "   9 - Buscar contato\n"
+                "   0 - Sair.\n\n"
                 "   Escolha uma opcao: ");
         scanf("%d", &opcao);
 
@@ -57,34 +70,37 @@ int main(){
                 adicionarUltimo(&agenda, preencherContato());
                 break;
             case 3:
-                adicionarQualquer(&agenda, preencherContato());
+                printf("Digite a posicao que deseja inserir o contato: ");
+                int posicao = 0;
+                scanf("%d", &posicao);
+                adicionarQualquer(&agenda, preencherContato(), posicao);
                 break;
             case 4:
                 imprimirContatos(&agenda);
                 break;
-            //case 5:
-            //    removerPrimeiro(&agenda);
-            //    break;
-            // case 5:
-            //     editarContato (&agenda);
-            //     break;
-            // case 6:
-            //     listarContatos (&agenda);
-            //     break;
-            // case 7:
-            //     buscarContato (&agenda);
-            //     break;
-            // case 8:
-            //     aumentarDiminuir (&agenda);
-            //     break;
+            case 5:
+               removerPrimeiro(&agenda);
+                break;
+            case 6:
+                removerUltimo(&agenda);
+                break;
+            case 7:
+                removerQualquer(&agenda);
+                break;
+            case 8:
+                editarContato(&agenda);
+                break;
             case 9:
+                buscarContato(&agenda);
+                break;
+            case 0:
                 printf("Saindo...\n");
                 break;
             default:
                 printf("Opcao invalida!\n");
                 break;
         }
-    }while(opcao != 9);
+    }while(opcao != 0);
 
     return 0;
 
