@@ -4,7 +4,7 @@
 #include "funcao.h"
 #include "struct.h"
 
-
+//certa, editar exibição para ser mais bonita
 void imprimirContatos(Inicio * inicio) {
     if(inicio->inicio == NULL) {
         printf("Agenda vazia!\n");
@@ -20,7 +20,7 @@ void imprimirContatos(Inicio * inicio) {
         }
         
         do{        
-            printf("---------Contato----------\n");
+            printf("---------Contato----------\n"); //colocar um numero que identifique cada contado para melhor exibição
             printf("Nome: %s\n", aux->nome);
             printf("Email: %s\n", aux->email);
             printf("Endereco: %s, %s - n: %d, %s\n", aux->endereco.bairro, aux->endereco.rua, aux->endereco.numero, aux->endereco.cidade);
@@ -33,6 +33,7 @@ void imprimirContatos(Inicio * inicio) {
     }
 }
 
+//dúvida sobre essa função
 void ContatosEstaticos(Inicio * agenda, Contato * contato1, Contato * contato2, Contato * contato3, Contato * contato4, Contato * contato5 ){
     
     contato1 = criador(contato1, "Joao", "gmail.com", "Rua A", 1, "Bairro A", "Cidade A", "11", "111111111", "11", "111111111 ");
@@ -50,6 +51,7 @@ void ContatosEstaticos(Inicio * agenda, Contato * contato1, Contato * contato2, 
 
 }
 
+//dúvida sobre essa função
 Contato * criador( Contato * contato, char nome[], char email[], char rua[], int numero, char bairro[], char cidade[], char ddd1[], char numero1[], char ddd2[], char numero2[]){
 
      contato = (Contato *) malloc(sizeof(Contato));
@@ -77,6 +79,7 @@ Contato * criador( Contato * contato, char nome[], char email[], char rua[], int
 
 }
 
+//sem erros
 Contato *preencherContato()
 {
 
@@ -104,7 +107,7 @@ Contato *preencherContato()
     return novoContato;
 }
 
-
+//certa
 void adicionarPrimeiro(Inicio * agenda, Contato * contato){
 
     Contato * novoContato = contato;
@@ -118,6 +121,7 @@ void adicionarPrimeiro(Inicio * agenda, Contato * contato){
     agenda->tamanho++;
 }
 
+//certa
 void adicionarUltimo(Inicio * agenda, Contato * contato){
 
     Contato * novoContato = contato;
@@ -135,6 +139,7 @@ void adicionarUltimo(Inicio * agenda, Contato * contato){
     agenda->tamanho++;
 }
 
+//certa
 void adicionarQualquer(Inicio * agenda, Contato * contato, int posicao){
 
 
@@ -184,6 +189,7 @@ void adicionarQualquer(Inicio * agenda, Contato * contato, int posicao){
     }
 }
 
+//certa
 void removerPrimeiro(Inicio * agenda){
 
    if(agenda->inicio == NULL){
@@ -198,7 +204,7 @@ void removerPrimeiro(Inicio * agenda){
 
 }
 
-
+//certa
 void removerUltimo(Inicio * agenda){
 
     if(agenda->inicio == NULL){
@@ -216,6 +222,7 @@ void removerUltimo(Inicio * agenda){
 
 }
 
+//certa - mudar observação da agenda, começa em 0, porém tinha que ser em 1 para não confundir o usuário
 void removerQualquer(Inicio * agenda){
 
     if(agenda->inicio == NULL){
@@ -276,6 +283,7 @@ void editarContato(Inicio *agenda){
 
 }
 
+//corrigir os segundo IF para que volte para o menu caso não encontre o contato
 void buscarContato(Inicio * agenda){
 
     if(agenda->inicio == NULL){
@@ -287,7 +295,7 @@ void buscarContato(Inicio * agenda){
 
         Contato * aux = agenda->inicio;
 
-        if(strcmpi(aux->nome, nome) != 0){
+        if(strcmpi(aux->nome, nome) != 0){ //corrigir apartir daqui
             printf("Contato nao encontrado!\n");
         }else{
             while(aux != NULL){
