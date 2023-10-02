@@ -1,361 +1,340 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "funcao.h"
-#include "struct.h"
+#include <stdio.h> //biblioteca padrao de entrada e saida
+#include <stdlib.h> //biblioteca padrao de funções 
+#include <string.h> //biblioteca para manipulação de strings
+#include "funcao.h" //chamativa do arquivo funcao.h
+#include "struct.h" //chamativa do arquivo struct.h
 
-//certa, editar exibição para ser mais bonita e organizada
-void imprimirContatos(Inicio * inicio) {
-    if(inicio->inicio == NULL) {
+void imprimirContatos(Inicio * inicio) { //função para imprimir os contatos
+    if(inicio->inicio == NULL) { //se o inicio for igual a NULL
         printf("------------------------------------------------------------------------------------------------------------------------\n");
-        printf("Agenda vazia!\n");
+        printf("Agenda vazia!\n"); //imprime uma mensagem para o usuario
         printf("------------------------------------------------------------------------------------------------------------------------\n\n");
-        return;
+        return; //retorna para a função main
     } 
-    else {
-        Contato * aux = inicio->inicio;
+    else { //senão
+        Contato * aux = inicio->inicio; //cria um ponteiro auxiliar e inicia ele com o inicio
 
-        if (aux == NULL)
+        if (aux == NULL) //se o aux for igual a NULL
         {
             printf("------------------------------------------------------------------------------------------------------------------------\n");
-            printf("Nao foi possivel alocar contato\n");
-            exit(1);
+            printf("Nao foi possivel alocar contato\n"); //imprime uma mensagem para o usuario
+            exit(1); //encerra o programa
             printf("------------------------------------------------------------------------------------------------------------------------\n\n");
         }
         
-        do{        
-            printf("\n---------------Contato--------------\n"); //colocar um numero que identifique cada contado para melhor exibição
-            printf("Nome: %s\n", aux->nome);
+        do{ //inicia um laço de repetição
+            printf("\n---------------Contato--------------\n"); //imprime a lista de contatos
+            printf("Nome: %s\n", aux->nome); 
             printf("Email: %s\n", aux->email);
             printf("Endereco: %s, %s - n: %d, %s\n", aux->endereco.bairro, aux->endereco.rua, aux->endereco.numero, aux->endereco.cidade);
             printf("Celular: (%s) %s\n", aux->telefone[0].ddd, aux->telefone[0].numero);
             printf("Telefone: (%s) %s\n", aux->telefone[1].ddd, aux->telefone[1].numero);
             printf("------------------------------------------------------------------------------------------------------------------------\n\n");
 
-            aux = aux->proximo;
-        }while(aux != NULL);
+            aux = aux->proximo; //aux recebe o proximo
+        }while(aux != NULL); //enquanto aux for diferente de NULL
     }
 }
 
-//dúvida sobre essa função
+//função para criar contatos estaticos
 void ContatosEstaticos(Inicio * agenda, Contato * contato1, Contato * contato2, Contato * contato3, Contato * contato4, Contato * contato5 ){
     
-    contato1 = criador(contato1, "Carlos Felipe Barbosa", "carlos.barbosa@gmail.com", "Rua Goias", 100, "Country Club", "Pocos de Caldas", "35", "92934565", "19", "92939854");
-    contato2 = criador(contato2, "Maria Clara Martins Marinelli", "marialinda@gmail.com", "Rua Sao Paulo", 200, "Azaleias", "Pocos de Caldas", "16", "93457812", "35", "87460128");
-    contato3 = criador(contato3, "Celso Augusto de Oliveira Junior", "celso.oliveira@gmail.com", "Rua Guarapiraca", 300, "Jardim Paraiso", "Espirito Santo do Pinhal", "36", "87230912", "19", "93475901");
-    contato4 = criador(contato4, "Luca Samuel dos Santos", "lucaReidelas@gmail.com", "Rua Prefeito Clepf", 400, "Jardim Belo Horizonte", "Sao Goncalo", "19", "99374918", "35", "98345681");
-    contato5 = criador(contato5, "Kaun Felipe Simao", "kauanzinApelao@gmail.com", "Rua Finlandia do Sul", 500, "Barra da Tijuca", "Capitolio", "11", "98473018", "35", "89273801");
+    contato1 = criador(contato1, "Carlos Felipe Barbosa", "carlos.barbosa@gmail.com", "Rua Goias", 100, "Country Club", "Pocos de Caldas", "35", "92934565", "19", "92939854"); //chama a função criador e cria um contato estatico
+    contato2 = criador(contato2, "Maria Clara Martins Marinelli", "marialinda@gmail.com", "Rua Sao Paulo", 200, "Azaleias", "Pocos de Caldas", "16", "93457812", "35", "87460128"); //chama a função criador e cria um contato estatico
+    contato3 = criador(contato3, "Celso Augusto de Oliveira Junior", "celso.oliveira@gmail.com", "Rua Guarapiraca", 300, "Jardim Paraiso", "Espirito Santo do Pinhal", "36", "87230912", "19", "93475901"); //chama a função criador e cria um contato estatico
+    contato4 = criador(contato4, "Luca Samuel dos Santos", "lucaReidelas@gmail.com", "Rua Prefeito Clepf", 400, "Jardim Belo Horizonte", "Sao Goncalo", "19", "99374918", "35", "98345681"); //chama a função criador e cria um contato estatico
+    contato5 = criador(contato5, "Kauan Felipe Simao", "kauanzinApelao@gmail.com", "Rua Finlandia do Sul", 500, "Barra da Tijuca", "Capitolio", "11", "98473018", "35", "89273801"); //chama a função criador e cria um contato estatico
 
-    adicionarPrimeiro(agenda, contato1);
-    adicionarUltimo(agenda, contato2);
-    adicionarUltimo(agenda, contato3);
-    adicionarUltimo(agenda, contato4);
-    adicionarUltimo(agenda, contato5);
+    adicionarPrimeiro(agenda, contato1); //chama a função adicionarPrimeiro e adiciona o contato1
+    adicionarUltimo(agenda, contato2); //chama a função adicionarUltimo e adiciona o contato2
+    adicionarUltimo(agenda, contato3); //chama a função adicionarUltimo e adiciona o contato3
+    adicionarUltimo(agenda, contato4); //chama a função adicionarUltimo e adiciona o contato4
+    adicionarUltimo(agenda, contato5); //chama a função adicionarUltimo e adiciona o contato5
 
 }
 
 
-//dúvida sobre essa função
+//função para criar contatos
 Contato * criador( Contato * contato, char nome[], char email[], char rua[], int numero, char bairro[], char cidade[], char ddd1[], char numero1[], char ddd2[], char numero2[]){
 
-    contato = (Contato *) malloc(sizeof(Contato));
+    contato = (Contato *) malloc(sizeof(Contato)); //aloca memoria para o contato
 
-    if (contato == NULL)
+    if (contato == NULL) //se o contato for igual a NULL
     {
          printf("------------------------------------------------------------------------------------------------------------------------\n");
-        printf("Nao foi possivel alocar contato\n");
+        printf("Nao foi possivel alocar contato\n"); //imprime uma mensagem para o usuario
          printf("------------------------------------------------------------------------------------------------------------------------\n\n");
-        exit(1);
+        exit(1); //encerra o programa
     }
 
-    strcpy(contato->nome, nome);
-    strcpy(contato->email, email);
-    strcpy(contato->endereco.rua, rua);
-    contato->endereco.numero = numero;
-    strcpy(contato->endereco.bairro, bairro);
-    strcpy(contato->endereco.cidade, cidade);
-    strcpy(contato->telefone[0].ddd, ddd1);
-    strcpy(contato->telefone[0].numero, numero1);
-    strcpy(contato->telefone[1].ddd, ddd2);
-    strcpy(contato->telefone[1].numero, numero2);
+    strcpy(contato->nome, nome); //copia o nome para o contato
+    strcpy(contato->email, email); //copia o email para o contato
+    strcpy(contato->endereco.rua, rua); //copia a rua para o contato
+    contato->endereco.numero = numero; //copia o numero para o contato
+    strcpy(contato->endereco.bairro, bairro); //copia o bairro para o contato
+    strcpy(contato->endereco.cidade, cidade); //copia a cidade para o contato
+    strcpy(contato->telefone[0].ddd, ddd1); //copia o ddd1 para o contato
+    strcpy(contato->telefone[0].numero, numero1); //copia o numero1 para o contato 
+    strcpy(contato->telefone[1].ddd, ddd2); //copia o ddd2 para o contato 
+    strcpy(contato->telefone[1].numero, numero2); //copia o numero2 para o contato
+ 
+    contato->proximo = NULL; //o proximo do contato recebe NULL
 
-    contato->proximo = NULL;
-
-    return contato;
+    return contato; //retorna o contato
 
 }
 
-//sem erros
-Contato *preencherContato()
+Contato *preencherContato() //função para preencher o contato
 {
 
-    Contato * novoContato = (Contato *) malloc(sizeof(Contato));
+    Contato * novoContato = (Contato *) malloc(sizeof(Contato)); //aloca memoria para o novoContato
 
-
+    //imprime uma mensagem para o usuario para preencher o contato
     printf("------------------------------------------------------------------------------------------------------------------------\n");
-    printf("Digite o nome: ");
-    scanf(" %50[^\n]s", novoContato->nome);
+    printf("Digite o nome: "); 
+    scanf(" %50[^\n]s", novoContato->nome); //le o nome do contato limitando a 50 caracteres e ignorando o \n do buffer
     printf("Digite o email: ");
-    scanf(" %30[^\n]s", novoContato->email);
+    scanf(" %30[^\n]s", novoContato->email); //le o email do contato limitando a 30 caracteres e ignorando o \n do buffer
     printf("Digite o seu bairro: ");
-    scanf(" %50[^\n]s", novoContato->endereco.bairro);
+    scanf(" %50[^\n]s", novoContato->endereco.bairro); //le o bairro do contato limitando a 50 caracteres e ignorando o \n do buffer
     printf("Digite o nome da sua rua: ");
-    scanf(" %50[^\n]s", novoContato->endereco.rua);
+    scanf(" %50[^\n]s", novoContato->endereco.rua); //le a rua do contato limitando a 50 caracteres e ignorando o \n do buffer
     printf("Digite o numero da sua casa: ");
-    scanf("%d", &novoContato->endereco.numero);
-    printf("Digite a sua cidade: ");
-    scanf(" %50[^\n]s", novoContato->endereco.cidade);
+    scanf("%d", &novoContato->endereco.numero); //le o numero da casa do contato
+    printf("Digite a sua cidade: "); 
+    scanf(" %50[^\n]s", novoContato->endereco.cidade); //le a cidade do contato limitando a 50 caracteres e ignorando o \n do buffer
     printf("Digite o seu celular (<xx> <xxxxxxxxx>): ");
-    scanf("%2s %s", novoContato->telefone[0].ddd, novoContato->telefone[0].numero);
+    scanf("%2s %s", novoContato->telefone[0].ddd, novoContato->telefone[0].numero); //le o ddd e o numero do celular limitando a 2 e 9 caracteres respectivamente
     printf("Digite o seu telefone (<xx> <xxxxxxxxx>): ");
-    scanf("%2s %s", novoContato->telefone[1].ddd, novoContato->telefone[1].numero);
+    scanf("%2s %s", novoContato->telefone[1].ddd, novoContato->telefone[1].numero); //le o ddd e o numero do telefone limitando a 2 e 9 caracteres respectivamente
     printf("------------------------------------------------------------------------------------------------------------------------\n\n");
 
-    novoContato->proximo = NULL;
+    novoContato->proximo = NULL; //o proximo do novoContato recebe NULL
 
-    return novoContato;
+    return novoContato; //retorna o novoContato
+
 }
 
-//certa
-void adicionarPrimeiro(Inicio * agenda, Contato * contato){
+void adicionarPrimeiro(Inicio * agenda, Contato * contato){ //função para adicionar um contato na primeira posição
 
-    Contato * novoContato = contato;
+    Contato * novoContato = contato; //cria um ponteiro novoContato e inicia ele com o contato
 
-    if(agenda->inicio == NULL){
-        agenda->inicio = novoContato;
-    }else{
-        novoContato->proximo = agenda->inicio;
-        agenda->inicio = novoContato;
+    if(agenda->inicio == NULL){ //se o inicio for igual a NULL
+        agenda->inicio = novoContato; //o inicio recebe o novoContato
+    }else{ //senão
+        novoContato->proximo = agenda->inicio; //o proximo do novoContato recebe o inicio
+        agenda->inicio = novoContato; //o inicio recebe o novoContato
     }
-    agenda->tamanho++;
+    agenda->tamanho++; //incrementa o tamanho da agenda
 }
 
-//certa
-void adicionarUltimo(Inicio * agenda, Contato * contato){
+void adicionarUltimo(Inicio * agenda, Contato * contato){ //função para adicionar um contato na ultima posição
 
-    Contato * novoContato = contato;
+    Contato * novoContato = contato; //cria um ponteiro novoContato e inicia ele com o contato
 
-    if(agenda->inicio == NULL){
-        agenda->inicio = novoContato;
-    }else{
-        Contato * aux = agenda->inicio;
-        while(aux->proximo != NULL){
-            aux = aux->proximo;
+    if(agenda->inicio == NULL){ //se o inicio for igual a NULL
+        agenda->inicio = novoContato; //o inicio recebe o novoContato
+    }else{ //senão
+        Contato * aux = agenda->inicio; //cria um ponteiro auxiliar e inicia ele com o inicio
+        while(aux->proximo != NULL){ //enquanto o proximo do aux for diferente de NULL
+            aux = aux->proximo; //aux recebe o proximo
         }
-        aux->proximo = novoContato;
+        aux->proximo = novoContato; //o proximo do aux recebe o novoContato
     }
 
-    agenda->tamanho++;
+    agenda->tamanho++; //incrementa o tamanho da agenda
 }
 
-//ta errada agora sabosta
-void adicionarQualquer(Inicio * agenda, Contato * contato, int posicao){
+void adicionarQualquer(Inicio * agenda, Contato * contato, int posicao){ //função para adicionar um contato em qualquer posição
 
-
-    if(posicao < 1) 
+    if(posicao < 1) //se a posição for menor que 1
     {
         printf("------------------------------------------------------------------------------------------------------------------------\n");
-        printf("Impossivel inserir elementos em posicoes negativas ou nulas!\n");
+        printf("Impossivel inserir elementos em posicoes negativas ou nulas!\n"); //imprime uma mensagem para o usuario
         printf("------------------------------------------------------------------------------------------------------------------------\n\n");
-        return;
+        return; //retorna para a função main
     }
 
-    Contato * atual = agenda->inicio;
-    Contato * proximo = atual;
+    Contato * atual = agenda->inicio; //cria um ponteiro atual e inicia ele com o inicio
+    Contato * proximo = atual; //cria um ponteiro proximo e inicia ele com o atual
     
-    if(posicao == 1) 
+    if(posicao == 1) //se a posição for igual a 1
     {
-        if(agenda->inicio == NULL)
-        {
-        agenda->inicio = contato;
+        if(agenda->inicio == NULL){ //se o inicio for igual a NULL
+            agenda->inicio = contato; //o inicio recebe o contato
+        }else{ //senão
+            contato->proximo = agenda->inicio; //o proximo do contato recebe o inicio
+            agenda->inicio = contato; //o inicio recebe o contato
         }
-        else
-        {
-        contato->proximo = agenda->inicio;
-        agenda->inicio = contato;
-        }
-        agenda->tamanho++;
+        agenda->tamanho++; //incrementa o tamanho da agenda
 
-        return;
+        return; //retorna para a função main
     }
 
-    if(posicao > agenda->tamanho) {
+    if(posicao > agenda->tamanho) { //se a posição for maior que o tamanho da agenda
         printf("------------------------------------------------------------------------------------------------------------------------\n");
-        printf("Posicao inexistente!\n");
+        printf("Posicao inexistente!\n"); //imprime uma mensagem para o usuario
         printf("------------------------------------------------------------------------------------------------------------------------\n\n");
-        return;
+        return; //retorna para a função main
     } 
     
-    int contador = 1;
+    int contador = 1; //cria uma variavel do tipo inteiro e inicia ela com 1
     
-    while(atual->proximo != NULL) {
+    while(atual->proximo != NULL) { //enquanto o proximo do atual for diferente de NULL
 
-        if(contador == posicao){
-            atual->proximo = contato;
-            contato->proximo = proximo;
-            agenda->tamanho++;
-            return;
+        if(contador == posicao){ //se o contador for igual a posição
+            atual->proximo = contato; //o proximo do atual recebe o contato
+            contato->proximo = proximo; //o proximo do contato recebe o proximo
+            agenda->tamanho++; //incrementa o tamanho da agenda
+            return; //retorna para a função main
         }
-        atual = proximo;
-        proximo = proximo->proximo;
-        contador++;
+        atual = proximo; //atual recebe o proximo
+        proximo = proximo->proximo; //proximo recebe o proximo
+        contador++; //incrementa o contador
     }
 }
 
-//certa
-void removerPrimeiro(Inicio * agenda){
+void removerPrimeiro(Inicio * agenda){ //função para remover o primeiro contato
 
-   if(agenda->inicio == NULL){
+   if(agenda->inicio == NULL){ //se o inicio for igual a NULL
     printf("------------------------------------------------------------------------------------------------------------------------\n");
-    printf("Agenda vazia!\n");
+    printf("Agenda vazia!\n"); //imprime uma mensagem para o usuario
     printf("------------------------------------------------------------------------------------------------------------------------\n\n");
-  }else{
-    Contato * aux = agenda->inicio;
-    agenda->inicio = aux->proximo;
-    free(aux);
+  }else{ //senão
+    Contato * aux = agenda->inicio; //cria um ponteiro auxiliar e inicia ele com o inicio
+    agenda->inicio = aux->proximo; //o inicio recebe o proximo do aux
+    free(aux); //libera o aux
    }
 
-   agenda->tamanho--;
+   agenda->tamanho--; //decrementa o tamanho da agenda
 
 }
 
-//certa
-void removerUltimo(Inicio * agenda){
+void removerUltimo(Inicio * agenda){ //função para remover o ultimo contato
 
-    if(agenda->inicio == NULL){
+    if(agenda->inicio == NULL){ //se o inicio for igual a NULL
         printf("------------------------------------------------------------------------------------------------------------------------\n");
-        printf("Agenda vazia!\n");
+        printf("Agenda vazia!\n"); //imprime uma mensagem para o usuario
         printf("------------------------------------------------------------------------------------------------------------------------\n\n");
-    }else{
-        Contato * aux = agenda->inicio;
-        while(aux->proximo->proximo != NULL){
-            aux = aux->proximo;
+    }else{ //senão
+        Contato * aux = agenda->inicio; //cria um ponteiro auxiliar e inicia ele com o inicio
+        while(aux->proximo->proximo != NULL){ //enquanto o proximo do proximo do aux for diferente de NULL
+            aux = aux->proximo; //aux recebe o proximo
         }
-        free(aux->proximo);
-        aux->proximo = NULL;
+        free(aux->proximo); //libera o proximo do aux
+        aux->proximo = NULL; //o proximo do aux recebe NULL
     }
 
-    agenda->tamanho--;
+    agenda->tamanho--; //decrementa o tamanho da agenda
 
 }
 
-//certa
-void removerQualquer(Inicio * agenda){
+void removerQualquer(Inicio * agenda){ //função para remover um contato em qualquer posição
 
-    if(agenda->inicio == NULL){
+    if(agenda->inicio == NULL){ //se o inicio for igual a NULL
         printf("------------------------------------------------------------------------------------------------------------------------\n");
-        printf("Agenda vazia!\n");
+        printf("Agenda vazia!\n"); //imprime uma mensagem para o usuario
         printf("------------------------------------------------------------------------------------------------------------------------\n\n");
-    }else{
-        int posicao = 0;
+    }else{ //senão
+        int posicao = 0; //cria uma variavel do tipo inteiro e inicia ela com 0
         printf("------------------------------------------------------------------------------------------------------------------------\n");
-        printf("(OBS: A primeira posicao eh 0)\n "
-        "Digite a posicao que deseja remover o contato: ");
-        scanf("%d", &posicao);
+        printf("(OBS: A primeira posicao eh 0)\n " //imprime uma mensagem para o usuario
+        "Digite a posicao que deseja remover o contato: "); //imprime uma mensagem para o usuario
+        scanf("%d", &posicao); //le a posição escolhida pelo usuario
 
-        Contato * aux = agenda->inicio;
-        Contato * aux2 = aux->proximo;
-        for(int i = 0; i < posicao - 1; i++){
-            aux = aux->proximo;
-            aux2 = aux2->proximo;
+        Contato * aux = agenda->inicio; //cria um ponteiro auxiliar e inicia ele com o inicio
+        Contato * aux2 = aux->proximo; //cria um segundo ponteiro auxiliar e inicia ele com o proximo do aux
+        for(int i = 0; i < posicao - 1; i++){ //inicia um laço de repetição
+            aux = aux->proximo; //aux recebe o proximo
+            aux2 = aux2->proximo; //aux2 recebe o proximo
         }
-        aux->proximo = aux2->proximo;
-        free(aux2);
+        aux->proximo = aux2->proximo; //o proximo do aux recebe o proximo do aux2
+        free(aux2); //libera o aux2
     }
 
-    agenda->tamanho--;
+    agenda->tamanho--; //decrementa o tamanho da agenda
 
 }
 
-//corrigir essa função
-void editarContato(Inicio *agenda){
+void editarContato(Inicio *agenda){ //função para editar um contato
 
-    if(agenda->inicio == NULL){
+    if(agenda->inicio == NULL){ //se o inicio for igual a NULL
         printf("------------------------------------------------------------------------------------------------------------------------\n");
-        printf("Agenda vazia!\n");
+        printf("Agenda vazia!\n"); //imprime uma mensagem para o usuario
         printf("------------------------------------------------------------------------------------------------------------------------\n\n");
-    }else{
-        char nome[LIMIT_NOME];
+    }else{ //senão
+        char nome[LIMIT_NOME]; //cria uma variavel do tipo string
         printf("------------------------------------------------------------------------------------------------------------------------\n");
-        printf("Digite o nome que deseja editar: ");
-        scanf(" %50[^\n]s", nome);
+        printf("Digite o nome que deseja editar: "); //imprime uma mensagem para o usuario
+        scanf(" %50[^\n]s", nome); //le o nome do contato limitando a 50 caracteres e ignorando o \n do buffer
         printf("------------------------------------------------------------------------------------------------------------------------\n");
 
-        Contato * aux = agenda->inicio;
-        int encontrado = 0;
-        while(aux != NULL){
-            if(strcmpi(aux->nome, nome) == 0){
+        Contato * aux = agenda->inicio; //cria um ponteiro auxiliar e inicia ele com o inicio
+        int encontrado = 0; //cria uma variavel do tipo inteiro e inicia ela com 0
+        while(aux != NULL){ //enquanto o aux for diferente de NULL
+            if(strcmpi(aux->nome, nome) == 0){ //se o nome do aux for igual ao nome
                 printf("------------------------------------------------------------------------------------------------------------------------\n");
                 printf("Digite o novo nome: ");
-                scanf(" %50[^\n]s", aux->nome);
+                scanf(" %50[^\n]s", aux->nome); //le o nome do contato limitando a 50 caracteres e ignorando o \n do buffer
                 printf("Digite o novo email: ");
-                scanf(" %30[^\n]s", aux->email);
+                scanf(" %30[^\n]s", aux->email); //le o email do contato limitando a 30 caracteres e ignorando o \n do buffer
                 printf("Digite o novo bairro: ");
-                scanf(" %50[^\n]s", aux->endereco.bairro);
-                printf("Digite o novo nome da rua: ");
-                scanf(" %50[^\n]s", aux->endereco.rua);
+                scanf(" %50[^\n]s", aux->endereco.bairro); //le o bairro do contato limitando a 50 caracteres e ignorando o \n do buffer
+                printf("Digite o novo nome da rua: "); 
+                scanf(" %50[^\n]s", aux->endereco.rua); //le a rua do contato limitando a 50 caracteres e ignorando o \n do buffer
                 printf("Digite o novo numero da casa: ");
-                scanf("%d", &aux->endereco.numero);
-                printf("Digite a nova cidade: ");
-                scanf(" %50[^\n]s", aux->endereco.cidade);
-                printf("Digite o novo celular (<xx> <xxxxxxxxx>): ");
-                scanf("%2s %9s", aux->telefone[0].ddd, aux->telefone[0].numero);
+                scanf("%d", &aux->endereco.numero); //le o numero da casa do contato
+                printf("Digite a nova cidade: "); 
+                scanf(" %50[^\n]s", aux->endereco.cidade); //le a cidade do contato limitando a 50 caracteres e ignorando o \n do buffer
+                printf("Digite o novo celular (<xx> <xxxxxxxxx>): "); 
+                scanf("%2s %9s", aux->telefone[0].ddd, aux->telefone[0].numero); //le o ddd e o numero do celular limitando a 2 e 9 caracteres respectivamente
                 printf("Digite o novo telefone (<xx> <xxxxxxxxx>): ");
-                scanf("%2s %9s", aux->telefone[1].ddd, aux->telefone[1].numero);
+                scanf("%2s %9s", aux->telefone[1].ddd, aux->telefone[1].numero); //le o ddd e o numero do telefone limitando a 2 e 9 caracteres respectivamente
                 printf("------------------------------------------------------------------------------------------------------------------------\n\n");
-                encontrado = 1;
+                encontrado = 1; //encontrado recebe 1
             }
-            aux = aux->proximo;
+            aux = aux->proximo; //aux recebe o proximo
         }
-        if (!encontrado) {
+        if (!encontrado) { //se não encontrado
             printf("------------------------------------------------------------------------------------------------------------------------\n");
-            printf("Contato nao encontrado!\n");
+            printf("Contato nao encontrado!\n"); //imprime uma mensagem para o usuario
             printf("------------------------------------------------------------------------------------------------------------------------\n\n");
         }
     }
-
 }
 
-//corrigido
-void buscarContato(Inicio * agenda){
+void buscarContato(Inicio * agenda){ //função para buscar um contato
 
-    if(agenda->inicio == NULL){
+    if(agenda->inicio == NULL){ //se o inicio for igual a NULL
         printf("------------------------------------------------------------------------------------------------------------------------\n");
-        printf("Agenda vazia!\n");
+        printf("Agenda vazia!\n"); //imprime uma mensagem para o usuario
         printf("------------------------------------------------------------------------------------------------------------------------\n\n");
-    }else{
-        char nome[LIMIT_NOME];
+    }else{ //senão
+        char nome[LIMIT_NOME]; //cria uma variavel do tipo string
         printf("------------------------------------------------------------------------------------------------------------------------\n");
-        printf("Digite o nome que deseja buscar: ");
-        scanf(" %50[^\n]s", nome);
+        printf("Digite o nome (completo) que deseja buscar: "); //imprime uma mensagem para o usuario
+        scanf(" %50[^\n]s", nome); //le o nome do contato limitando a 50 caracteres e ignorando o \n do buffer
 
-        Contato * aux = agenda->inicio;
-        int encontrado = 0;
+        Contato * aux = agenda->inicio; //cria um ponteiro auxiliar e inicia ele com o inicio
+        int encontrado = 0; //cria uma variavel do tipo inteiro e inicia ela com 0
 
-        while(aux != NULL){
-            if(strcmpi(aux->nome, nome) == 0){
+        while(aux != NULL){ //enquanto o aux for diferente de NULL
+            if(strcmpi(aux->nome, nome) == 0){ //se o nome do aux for igual ao nome existente na agenda
                 printf("------------------------------------------------------------------------------------------------------------------------\n");
-                printf("Nome: %s\n", aux->nome);
-                printf("Email: %s\n", aux->email);
-                printf("Rua: %s\n", aux->endereco.rua);
-                printf("Numero: %d\n", aux->endereco.numero);
-                printf("Bairro: %s\n", aux->endereco.bairro);
-                printf("Cidade: %s\n", aux->endereco.cidade);
-                printf("DDD do celular: %s\n", aux->telefone[0].ddd);
-                printf("Numero do celular: %s\n", aux->telefone[0].numero);
-                printf("DDD do telefone: %s\n", aux->telefone[1].ddd);
-                printf("Numero do telefone: %s\n", aux->telefone[1].numero);
-                printf("\n");
-                encontrado = 1;
+                printf("Nome: %s\n", aux->nome); //imprime o nome do contato
+                printf("Email: %s\n", aux->email); //imprime o email do contato
+                printf("Endereco: %s, %s - n: %d, %s\n", aux->endereco.bairro, aux->endereco.rua, aux->endereco.numero, aux->endereco.cidade); //imprime o endereco do contato
+                printf("Celular: (%s) %s\n", aux->telefone[0].ddd, aux->telefone[0].numero); //imprime o celular do contato
+                printf("Telefone: (%s) %s\n", aux->telefone[1].ddd, aux->telefone[1].numero); //imprime o telefone do contato
+                printf("\n"); 
+                encontrado = 1; //encontrado recebe 1
             }
-            aux = aux->proximo;
+            aux = aux->proximo; //aux recebe o proximo
         }
-        if (!encontrado) {
+        if (!encontrado) { //se não encontrado
             printf("------------------------------------------------------------------------------------------------------------------------\n");
-            printf("Contato nao encontrado!\n");
+            printf("Contato nao encontrado!\n"); //imprime uma mensagem para o usuario
             printf("------------------------------------------------------------------------------------------------------------------------\n\n");
         }
     }
 }
-
-
